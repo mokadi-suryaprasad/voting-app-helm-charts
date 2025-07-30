@@ -1,15 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "vote.fullname" . }}
+  name: {{ .Chart.Name }}
   labels:
-    {{- include "vote.labels" . | nindent 4 }}
+    app: {{ .Chart.Name }}
 spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+      targetPort: 80
+      name: {{ .Chart.Name }}-service
   selector:
-    {{- include "vote.selectorLabels" . | nindent 4 }}
+    app: {{ .Chart.Name }}
