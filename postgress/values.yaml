@@ -19,7 +19,7 @@ resources: {}
 
 persistence:
   enabled: true
-  storageClass: ""  # Set to "" to use default GKE StorageClass
+  storageClass: "standard"
   accessModes:
     - ReadWriteOnce
   size: 1Gi
