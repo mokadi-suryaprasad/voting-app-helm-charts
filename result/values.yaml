@@ -12,3 +12,18 @@ service:
   type: ClusterIP
   port: 80
   targetPort: 80
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: result.suryadev.shop
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - result.suryadev.shop
+      secretName: nginx-tls-default
