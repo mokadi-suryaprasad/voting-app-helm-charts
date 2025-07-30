@@ -1,18 +1,25 @@
 replicaCount: 1
 
 image:
-  repository: redis
-  tag: alpine
+  repository: postgres
+  tag: "9.4"
   pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
-  port: 6379
+  port: 5432
+
+postgresql:
+  user: postgres
+  password: postgres
+  pgdata: /var/lib/postgresql/data/pgdata
+  storage: 1Gi
 
 resources: {}
 
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+persistence:
+  enabled: true
+  storageClass: ""  # Set to "" to use default GKE StorageClass
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
