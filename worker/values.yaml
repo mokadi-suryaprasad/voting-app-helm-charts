@@ -14,11 +14,11 @@ service:
   clusterIP: None
 
 env:
-  REDIS_HOST: redis-redis
-  DB_HOST: postgress-db
+  REDIS_HOST: redis-redis.development.svc.cluster.local
+  DB_HOST: postgress-db.development.svc.cluster.local
   DB_PORT: "5432"
-  DB_USER: postgres       # adjust if different
-  DB_PASSWORD: postgres   # use a Kubernetes secret for real setup
+  DB_USER: postgres
+  DB_PASSWORD: postgres
 
 resources: {}
 nodeSelector: {}
