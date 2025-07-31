@@ -1,35 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}
+  name: {{ .Release.Name }}-worker
   labels:
-    app: {{ .Chart.Name }}
+    app: worker
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: worker
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: worker
     spec:
-      containers:
-      - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        env:
-          - name: POSTGRES_HOST
-            value: "db"  # ✅ This must match your PostgreSQL service name in Kubernetes
-          - name: POSTGRES_USER
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: username
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-secret
-                key: password
       imagePullSecrets:
-{{ toYaml .Values.imagePullSecrets | indent 6 }}
+        {{- toYaml .Values.imagePullSecrets | nindent 8 }}
+      containers:
+        - name: worker
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
