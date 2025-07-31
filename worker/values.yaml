@@ -5,9 +5,6 @@ image:
   tag: worker
   pullPolicy: IfNotPresent
 
-service:
-  clusterIP: None
-
 imagePullSecrets:
   - name: docker-pwd
 
