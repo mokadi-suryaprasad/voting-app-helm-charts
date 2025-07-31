@@ -23,7 +23,4 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-  tls:
-    - hosts:
-        - result.suryadev.shop
-      secretName: nginx-tls-default
+  tls: []  # TLS disabled (no secret provided)
