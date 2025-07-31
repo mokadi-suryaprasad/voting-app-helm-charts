@@ -1,27 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "worker.fullname" . }}
   labels:
-    app: {{ include "worker.name" . }}
+    app: worker
+  name: worker
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
-      app: {{ include "worker.name" . }}
+      app: worker
   template:
     metadata:
       labels:
-        app: {{ include "worker.name" . }}
+        app: worker
     spec:
       containers:
-        - name: worker
-          image: "{{ .Values.image.repository }}{{ if .Values.image.tag }}:{{ .Values.image.tag }}{{ end }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            - name: REDIS
-              value: {{ .Values.env.redisHost }}
-            - name: DB
-              value: "Host={{ .Values.env.dbHost }};Port={{ .Values.env.dbPort }};Username={{ .Values.env.dbUser }};Password={{ .Values.env.dbPassword }};Database=postgres"
-      imagePullSecrets:
-        - name: docker-pwd
+      - image: suryaprasad9773/votingapp:worker
+        name: worker
