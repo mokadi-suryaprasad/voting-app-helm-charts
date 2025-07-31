@@ -22,4 +22,6 @@ spec:
             - name: REDIS
               value: {{ .Values.env.redisHost }}
             - name: DB
-              value: {{ .Values.env.dbHost }}
+              value: "Host={{ .Values.env.dbHost }};Port={{ .Values.env.dbPort }};Username={{ .Values.env.dbUser }};Password={{ .Values.env.dbPassword }};Database=postgres"
+      imagePullSecrets:
+        - name: docker-pwd
