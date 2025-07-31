@@ -8,19 +8,20 @@ image:
 imagePullSecrets:
   - name: docker-pwd
 
-service:
-  type: ClusterIP
-  port: 80
-  clusterIP: None
+nameOverride: ""
+fullnameOverride: ""
 
 env:
-  REDIS_HOST: redis-redis.development.svc.cluster.local
-  DB_HOST: postgress-db.development.svc.cluster.local
-  DB_PORT: "5432"
-  DB_USER: postgres
-  DB_PASSWORD: postgres
+  redisHost: redis-redis.development.svc.cluster.local
+  dbHost: postgress-db.development.svc.cluster.local
+  dbPort: "5432"
+  dbUser: postgres
+  dbPassword: postgres
 
 resources: {}
+
 nodeSelector: {}
+
 tolerations: []
-affinity: []
+
+affinity: {}
