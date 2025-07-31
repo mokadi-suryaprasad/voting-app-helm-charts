@@ -5,18 +5,22 @@ image:
   tag: worker
   pullPolicy: IfNotPresent
 
-service:
-  type: ClusterIP
-  clusterIP: None
-  port: 80
-
 imagePullSecrets:
   - name: docker-pwd
 
+service:
+  type: ClusterIP
+  port: 80
+  clusterIP: None
+
+env:
+  REDIS_HOST: redis-redis
+  DB_HOST: postgress-db
+  DB_PORT: "5432"
+  DB_USER: postgres       # adjust if different
+  DB_PASSWORD: postgres   # use a Kubernetes secret for real setup
+
 resources: {}
-
 nodeSelector: {}
-
 tolerations: []
-
-affinity: {}
+affinity: []
