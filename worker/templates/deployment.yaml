@@ -1,25 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}
+  name: worker
   labels:
-    app: {{ .Chart.Name }}
+    app: worker
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: worker
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: worker
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: worker
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: REDIS_HOST
+              value: {{ .Values.env.REDIS_HOST }}
+            - name: DB_HOST
+              value: {{ .Values.env.DB_HOST }}
+            - name: DB_PORT
+              value: {{ .Values.env.DB_PORT }}
+            - name: DB_USER
+              value: {{ .Values.env.DB_USER }}
+            - name: DB_PASSWORD
+              value: {{ .Values.env.DB_PASSWORD }}
       imagePullSecrets:
-{{- toYaml .Values.imagePullSecrets | nindent 8 }}
-      nodeSelector: {{- toYaml .Values.nodeSelector | nindent 8 }}
-      tolerations: {{- toYaml .Values.tolerations | nindent 8 }}
-      affinity: {{- toYaml .Values.affinity | nindent 8 }}
+        {{- toYaml .Values.imagePullSecrets | nindent 8 }}
