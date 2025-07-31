@@ -5,7 +5,18 @@ image:
   tag: worker
   pullPolicy: IfNotPresent
 
+service:
+  type: ClusterIP
+  clusterIP: None
+  port: 80
+
 imagePullSecrets:
   - name: docker-pwd
 
 resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
