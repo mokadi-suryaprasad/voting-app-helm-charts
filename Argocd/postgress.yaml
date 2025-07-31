@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/mokadi-suryaprasad/voting-app-helm-charts.git
     targetRevision: HEAD
-    path: Argocd/postgress
+    path: postgress
   destination:
     server: https://kubernetes.default.svc
     namespace: development
