@@ -20,14 +20,14 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: REDIS_HOST
-              value: {{ .Values.env.REDIS_HOST }}
+              value: {{ .Values.env.REDIS_HOST | quote }}
             - name: DB_HOST
-              value: {{ .Values.env.DB_HOST }}
+              value: {{ .Values.env.DB_HOST | quote }}
             - name: DB_PORT
-              value: {{ .Values.env.DB_PORT }}
+              value: {{ .Values.env.DB_PORT | quote }}
             - name: DB_USER
-              value: {{ .Values.env.DB_USER }}
+              value: {{ .Values.env.DB_USER | quote }}
             - name: DB_PASSWORD
-              value: {{ .Values.env.DB_PASSWORD }}
+              value: {{ .Values.env.DB_PASSWORD | quote }}
       imagePullSecrets:
         {{- toYaml .Values.imagePullSecrets | nindent 8 }}
