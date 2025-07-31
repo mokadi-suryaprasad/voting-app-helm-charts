@@ -11,6 +11,13 @@ service:
 
 resources: {}
 
+persistence:
+  enabled: false
+  storageClass: "standard"
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+
 nodeSelector: {}
 
 tolerations: []
