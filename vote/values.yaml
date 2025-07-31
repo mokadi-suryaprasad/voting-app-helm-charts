@@ -1,4 +1,4 @@
-replicaCount: 2
+replicaCount: 1
 
 image:
   repository: suryaprasad9773/votingapp
@@ -11,6 +11,7 @@ imagePullSecrets:
 service:
   type: ClusterIP
   port: 80
+  targetPort: 80
 
 resources: {}
 
@@ -24,7 +25,4 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-  tls:
-    - hosts:
-        - vote.suryadev.shop
-      secretName: nginx-tls-default
+  tls: []  # <--- No TLS since you don’t have a TLS secret
