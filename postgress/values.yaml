@@ -6,16 +6,15 @@ image:
   pullPolicy: IfNotPresent
 
 service:
+  name: postgres
   type: ClusterIP
   port: 5432
 
 postgresql:
   user: postgres
   password: postgres
+  database: postgres
   pgdata: /var/lib/postgresql/data/pgdata
-  storage: 1Gi
-
-resources: {}
 
 persistence:
   enabled: true
@@ -23,3 +22,11 @@ persistence:
   accessModes:
     - ReadWriteOnce
   size: 1Gi
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
