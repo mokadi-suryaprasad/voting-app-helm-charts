@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-redis
   labels:
-    app: {{ .Release.Name }}-redis
+    app: redis
 spec:
-  clusterIP: None
+  type: {{ .Values.service.type }}
   ports:
     - name: redis
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.port }}
   selector:
-    app: {{ .Release.Name }}-redis
+    app: redis
