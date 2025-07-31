@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-redis
   labels:
-    app: {{ .Release.Name }}-redis
+    app: redis
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-redis
+      app: redis
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-redis
+        app: redis
     spec:
       containers:
         - name: redis
@@ -20,3 +20,10 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
+              name: redis
+          volumeMounts:
+            - name: redis-data
+              mountPath: /data
+      volumes:
+        - name: redis-data
+          emptyDir: {}
